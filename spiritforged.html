@@ -1,0 +1,834 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Grid</title>
+    <style>
+      body { font-family: sans-serif; background: #111; color: #fff; padding: 20px; }
+      .filter { margin-bottom: 20px; padding: 8px; font-size: 1em; width: 100%; max-width: 400px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
+      .card { display: flex; flex-direction: column; align-items: center; transition: transform 0.2s; }
+      .card img { width: 100%; border-radius: 8px; }
+      .count { margin-top: 8px; font-weight: bold; font-size: 1.1em; }
+      .name { margin-top: 4px; font-size: 0.9em; text-align: center; }
+    </style>
+    </head>
+    <body>
+    <h1>Card Collection</h1>
+    <input type="text" id="nameFilter" class="filter" placeholder="Filter by card name...">
+    <div class="grid" id="cardGrid">
+    
+        <div class="card" data-name="Against the Odds">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-001.webp?width=384" alt="Against the Odds">
+            <div class="name">Against the Odds</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Armed Assailant">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-002.webp?width=384" alt="Armed Assailant">
+            <div class="name">Armed Assailant</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Blood Rush">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-003.webp?width=384" alt="Blood Rush">
+            <div class="name">Blood Rush</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Bushwhack">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-004.webp?width=384" alt="Bushwhack">
+            <div class="name">Bushwhack</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Detonate">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-005.webp?width=384" alt="Detonate">
+            <div class="name">Detonate</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Serrated Dirk">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-009.webp?width=384" alt="Serrated Dirk">
+            <div class="name">Serrated Dirk</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Void Drone">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-010.webp?width=384" alt="Void Drone">
+            <div class="name">Void Drone</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Blast Corps Cadet">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-013.webp?width=384" alt="Blast Corps Cadet">
+            <div class="name">Blast Corps Cadet</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Perched Grimwyrm">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-015.webp?width=384" alt="Perched Grimwyrm">
+            <div class="name">Perched Grimwyrm</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Void Hatchling">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-018.webp?width=384" alt="Void Hatchling">
+            <div class="name">Void Hatchling</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Assembly Rig">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-019.webp?width=384" alt="Assembly Rig">
+            <div class="name">Assembly Rig</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Draven, Vanquisher">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-020.webp?width=384" alt="Draven, Vanquisher">
+            <div class="name">Draven, Vanquisher</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Piercing Light">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-023.webp?width=384" alt="Piercing Light">
+            <div class="name">Piercing Light</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Rell, Magnetic">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-024.webp?width=384" alt="Rell, Magnetic">
+            <div class="name">Rell, Magnetic</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Rengar, Pouncing">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-025.webp?width=384" alt="Rengar, Pouncing">
+            <div class="name">Rengar, Pouncing</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Rumble, Hotheaded">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-026.webp?width=384" alt="Rumble, Hotheaded">
+            <div class="name">Rumble, Hotheaded</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Dunebreaker">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-027.webp?width=384" alt="Dunebreaker">
+            <div class="name">Dunebreaker</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Desert's Call">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-031.webp?width=384" alt="Desert's Call">
+            <div class="name">Desert's Call</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Disarming Rake">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-032.webp?width=384" alt="Disarming Rake">
+            <div class="name">Disarming Rake</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Doran's Shield">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-033.webp?width=384" alt="Doran's Shield">
+            <div class="name">Doran's Shield</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Feral Strength">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-034.webp?width=384" alt="Feral Strength">
+            <div class="name">Feral Strength</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Navori Scout">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-037.webp?width=384" alt="Navori Scout">
+            <div class="name">Navori Scout</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Ribbon Dancer">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-038.webp?width=384" alt="Ribbon Dancer">
+            <div class="name">Ribbon Dancer</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Royal Entourage">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-039.webp?width=384" alt="Royal Entourage">
+            <div class="name">Royal Entourage</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Thwonk!">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-040.webp?width=384" alt="Thwonk!">
+            <div class="name">Thwonk!</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Apprentice Smith">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-041.webp?width=384" alt="Apprentice Smith">
+            <div class="name">Apprentice Smith</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Legion Quartermaster">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-044.webp?width=384" alt="Legion Quartermaster">
+            <div class="name">Legion Quartermaster</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Stellacorn Herder">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-048.webp?width=384" alt="Stellacorn Herder">
+            <div class="name">Stellacorn Herder</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Aphelios, Exalted">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-049.webp?width=384" alt="Aphelios, Exalted">
+            <div class="name">Aphelios, Exalted</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Azir, Ascendant">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-050.webp?width=384" alt="Azir, Ascendant">
+            <div class="name">Azir, Ascendant</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Guardian Angel">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-051.webp?width=384" alt="Guardian Angel">
+            <div class="name">Guardian Angel</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Heart of Dark Ice">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-052.webp?width=384" alt="Heart of Dark Ice">
+            <div class="name">Heart of Dark Ice</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Janna, Savior">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-053.webp?width=384" alt="Janna, Savior">
+            <div class="name">Janna, Savior</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Jax, Unmatched">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-054.webp?width=384" alt="Jax, Unmatched">
+            <div class="name">Jax, Unmatched</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Sterak's Gage">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-056.webp?width=384" alt="Sterak's Gage">
+            <div class="name">Sterak's Gage</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Ornn, Blacksmith">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-058a.webp?width=384" alt="Ornn, Blacksmith">
+            <div class="name">Ornn, Blacksmith</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Aspiring Engineer">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-061.webp?width=384" alt="Aspiring Engineer">
+            <div class="name">Aspiring Engineer</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Cloth Armor">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-064.webp?width=384" alt="Cloth Armor">
+            <div class="name">Cloth Armor</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Frigid Touch">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-066.webp?width=384" alt="Frigid Touch">
+            <div class="name">Frigid Touch</div>
+            <div class="count">3</div>
+        </div>
+        
+        <div class="card" data-name="Frostcoat Cub">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-067.webp?width=384" alt="Frostcoat Cub">
+            <div class="name">Frostcoat Cub</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Gearhead">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-068.webp?width=384" alt="Gearhead">
+            <div class="name">Gearhead</div>
+            <div class="count">3</div>
+        </div>
+        
+        <div class="card" data-name="Plundering Poro">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-069.webp?width=384" alt="Plundering Poro">
+            <div class="name">Plundering Poro</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Wages of Pain">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-070.webp?width=384" alt="Wages of Pain">
+            <div class="name">Wages of Pain</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Pickpocket">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-074.webp?width=384" alt="Pickpocket">
+            <div class="name">Pickpocket</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Rocket Barrage">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-077.webp?width=384" alt="Rocket Barrage">
+            <div class="name">Rocket Barrage</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Temporal Portal">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-078.webp?width=384" alt="Temporal Portal">
+            <div class="name">Temporal Portal</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Bard, Mercurial">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-079.webp?width=384" alt="Bard, Mercurial">
+            <div class="name">Bard, Mercurial</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Card Sharp">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-081.webp?width=384" alt="Card Sharp">
+            <div class="name">Card Sharp</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Ezreal, Dashing">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-082.webp?width=384" alt="Ezreal, Dashing">
+            <div class="name">Ezreal, Dashing</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Hextech Anomaly">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-083.webp?width=384" alt="Hextech Anomaly">
+            <div class="name">Hextech Anomaly</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Jayce, Man of Progress">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-084.webp?width=384" alt="Jayce, Man of Progress">
+            <div class="name">Jayce, Man of Progress</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Ornn, Forge God">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-085.webp?width=384" alt="Ornn, Forge God">
+            <div class="name">Ornn, Forge God</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="World Atlas">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-086.webp?width=384" alt="World Atlas">
+            <div class="name">World Atlas</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Buhru Captain">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-091.webp?width=384" alt="Buhru Captain">
+            <div class="name">Buhru Captain</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Combat Chef">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-092.webp?width=384" alt="Combat Chef">
+            <div class="name">Combat Chef</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Direwing">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-094.webp?width=384" alt="Direwing">
+            <div class="name">Direwing</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Doran's Blade">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-095.webp?width=384" alt="Doran's Blade">
+            <div class="name">Doran's Blade</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Laurent Bladekeeper">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-096.webp?width=384" alt="Laurent Bladekeeper">
+            <div class="name">Laurent Bladekeeper</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Punch First">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-097.webp?width=384" alt="Punch First">
+            <div class="name">Punch First</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Veteran Poro">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-099.webp?width=384" alt="Veteran Poro">
+            <div class="name">Veteran Poro</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Fae Dragon">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-101.webp?width=384" alt="Fae Dragon">
+            <div class="name">Fae Dragon</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Hexdrinker">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-102.webp?width=384" alt="Hexdrinker">
+            <div class="name">Hexdrinker</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Jaull-Fish">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-103.webp?width=384" alt="Jaull-Fish">
+            <div class="name">Jaull-Fish</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Ruin Runner">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-105.webp?width=384" alt="Ruin Runner">
+            <div class="name">Ruin Runner</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Show of Strength">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-106.webp?width=384" alt="Show of Strength">
+            <div class="name">Show of Strength</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Akshan, Mischievous">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-109.webp?width=384" alt="Akshan, Mischievous">
+            <div class="name">Akshan, Mischievous</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Here to Help">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-111.webp?width=384" alt="Here to Help">
+            <div class="name">Here to Help</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Kato the Arm">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-112.webp?width=384" alt="Kato the Arm">
+            <div class="name">Kato the Arm</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Lucian, Merciless">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-113.webp?width=384" alt="Lucian, Merciless">
+            <div class="name">Lucian, Merciless</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Marching Orders">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-114.webp?width=384" alt="Marching Orders">
+            <div class="name">Marching Orders</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Trinity Force">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-115.webp?width=384" alt="Trinity Force">
+            <div class="name">Trinity Force</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Yone, Blademaster">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-116.webp?width=384" alt="Yone, Blademaster">
+            <div class="name">Yone, Blademaster</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Black Market Broker">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-121.webp?width=384" alt="Black Market Broker">
+            <div class="name">Black Market Broker</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Called Shot">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-122.webp?width=384" alt="Called Shot">
+            <div class="name">Called Shot</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Doran's Ring">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-124.webp?width=384" alt="Doran's Ring">
+            <div class="name">Doran's Ring</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Loyal Pup">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-126.webp?width=384" alt="Loyal Pup">
+            <div class="name">Loyal Pup</div>
+            <div class="count">3</div>
+        </div>
+        
+        <div class="card" data-name="Master Bingwen">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-127.webp?width=384" alt="Master Bingwen">
+            <div class="name">Master Bingwen</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Overzealous Fan">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-128.webp?width=384" alt="Overzealous Fan">
+            <div class="name">Overzealous Fan</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Temptation">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-129.webp?width=384" alt="Temptation">
+            <div class="name">Temptation</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Treasure Hunter">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-130.webp?width=384" alt="Treasure Hunter">
+            <div class="name">Treasure Hunter</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Beast Below">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-132.webp?width=384" alt="Beast Below">
+            <div class="name">Beast Below</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Boots of Swiftness">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-133.webp?width=384" alt="Boots of Swiftness">
+            <div class="name">Boots of Swiftness</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Windsinger">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-138.webp?width=384" alt="Windsinger">
+            <div class="name">Windsinger</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Edge of Night">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-139.webp?width=384" alt="Edge of Night">
+            <div class="name">Edge of Night</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Fizz, Trickster">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-140.webp?width=384" alt="Fizz, Trickster">
+            <div class="name">Fizz, Trickster</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Irelia, Graceful">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-141.webp?width=384" alt="Irelia, Graceful">
+            <div class="name">Irelia, Graceful</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Jae Medarda">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-142.webp?width=384" alt="Jae Medarda">
+            <div class="name">Jae Medarda</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Sivir, Mercenary">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-143.webp?width=384" alt="Sivir, Mercenary">
+            <div class="name">Sivir, Mercenary</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Spirit Wheel">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-144.webp?width=384" alt="Spirit Wheel">
+            <div class="name">Spirit Wheel</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Switcheroo">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-145.webp?width=384" alt="Switcheroo">
+            <div class="name">Switcheroo</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Vex, Cheerless">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-146.webp?width=384" alt="Vex, Cheerless">
+            <div class="name">Vex, Cheerless</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Draven, Audacious">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-148.webp?width=384" alt="Draven, Audacious">
+            <div class="name">Draven, Audacious</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Eminent Benefactor">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-152.webp?width=384" alt="Eminent Benefactor">
+            <div class="name">Eminent Benefactor</div>
+            <div class="count">3</div>
+        </div>
+        
+        <div class="card" data-name="Eye of the Herald">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-153.webp?width=384" alt="Eye of the Herald">
+            <div class="name">Eye of the Herald</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Guards!">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-154.webp?width=384" alt="Guards!">
+            <div class="name">Guards!</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Honest Broker">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-155.webp?width=384" alt="Honest Broker">
+            <div class="name">Honest Broker</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Royal Guard">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-157.webp?width=384" alt="Royal Guard">
+            <div class="name">Royal Guard</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Zaun Punk">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-160.webp?width=384" alt="Zaun Punk">
+            <div class="name">Zaun Punk</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Deathgrip">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-163.webp?width=384" alt="Deathgrip">
+            <div class="name">Deathgrip</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Glasc Mixologist">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-165.webp?width=384" alt="Glasc Mixologist">
+            <div class="name">Glasc Mixologist</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Rally the Troops">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-166.webp?width=384" alt="Rally the Troops">
+            <div class="name">Rally the Troops</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Altar of Memories">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-169.webp?width=384" alt="Altar of Memories">
+            <div class="name">Altar of Memories</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Rek'Sai, Swarm Queen">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-170.webp?width=384" alt="Rek'Sai, Swarm Queen">
+            <div class="name">Rek'Sai, Swarm Queen</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Sacred Shears">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-172.webp?width=384" alt="Sacred Shears">
+            <div class="name">Sacred Shears</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Soraka, Wanderer">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-173.webp?width=384" alt="Soraka, Wanderer">
+            <div class="name">Soraka, Wanderer</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Trove Golem">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-174.webp?width=384" alt="Trove Golem">
+            <div class="name">Trove Golem</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Undertitan">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-175.webp?width=384" alt="Undertitan">
+            <div class="name">Undertitan</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Xin Zhao, Vigilant">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-176.webp?width=384" alt="Xin Zhao, Vigilant">
+            <div class="name">Xin Zhao, Vigilant</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Azir, Sovereign">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-177.webp?width=384" alt="Azir, Sovereign">
+            <div class="name">Azir, Sovereign</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Azir, Sovereign">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-177a.webp?width=384" alt="Azir, Sovereign">
+            <div class="name">Azir, Sovereign</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Fiora, Worthy">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-180a.webp?width=384" alt="Fiora, Worthy">
+            <div class="name">Fiora, Worthy</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Danger Zone">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-182.webp?width=384" alt="Danger Zone">
+            <div class="name">Danger Zone</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Purifier">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-183.webp?width=384" alt="Purifier">
+            <div class="name">Purifier</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Relentless Pursuit">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-184.webp?width=384" alt="Relentless Pursuit">
+            <div class="name">Relentless Pursuit</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Glorious Executioner">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-185.webp?width=384" alt="Glorious Executioner">
+            <div class="name">Glorious Executioner</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Void Burrower">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-187.webp?width=384" alt="Void Burrower">
+            <div class="name">Void Burrower</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Fire Below the Mountain">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-189.webp?width=384" alt="Fire Below the Mountain">
+            <div class="name">Fire Below the Mountain</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Grandmaster at Arms">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-193.webp?width=384" alt="Grandmaster at Arms">
+            <div class="name">Grandmaster at Arms</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Blade Dancer">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-195.webp?width=384" alt="Blade Dancer">
+            <div class="name">Blade Dancer</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Prodigal Explorer">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-199.webp?width=384" alt="Prodigal Explorer">
+            <div class="name">Prodigal Explorer</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Chem-Baroness">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-201.webp?width=384" alt="Chem-Baroness">
+            <div class="name">Chem-Baroness</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Battle Mistress">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-203.webp?width=384" alt="Battle Mistress">
+            <div class="name">Battle Mistress</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Grand Duelist">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-205.webp?width=384" alt="Grand Duelist">
+            <div class="name">Grand Duelist</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Riposte">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-206.webp?width=384" alt="Riposte">
+            <div class="name">Riposte</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Emperor's Dais">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-207.webp?width=384" alt="Emperor's Dais">
+            <div class="name">Emperor's Dais</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Forgotten Monument">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-209.webp?width=384" alt="Forgotten Monument">
+            <div class="name">Forgotten Monument</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Marai Spire">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-211.webp?width=384" alt="Marai Spire">
+            <div class="name">Marai Spire</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Ravenbloom Conservatory">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-215.webp?width=384" alt="Ravenbloom Conservatory">
+            <div class="name">Ravenbloom Conservatory</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Rockfall Path">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-216.webp?width=384" alt="Rockfall Path">
+            <div class="name">Rockfall Path</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="The Papertree">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-219.webp?width=384" alt="The Papertree">
+            <div class="name">The Papertree</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Yasuo, Windrider">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-235s.webp?width=384" alt="Yasuo, Windrider">
+            <div class="name">Yasuo, Windrider</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="SFD-T01">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-T01.webp?width=384" alt="SFD-T01">
+            <div class="name">SFD-T01</div>
+            <div class="count">2</div>
+        </div>
+        
+        <div class="card" data-name="Gold">
+            <img src="https://cdn.piltoverarchive.com/cards/SFD-T03.webp?width=384" alt="Gold">
+            <div class="name">Gold</div>
+            <div class="count">1</div>
+        </div>
+        
+    </div>
+    <script>
+    const filterInput = document.getElementById('nameFilter');
+    filterInput.addEventListener('input', () => {
+        const filter = filterInput.value.toLowerCase();
+        document.querySelectorAll('.card').forEach(card => {
+            const name = card.getAttribute('data-name').toLowerCase();
+            card.style.display = name.includes(filter) ? 'flex' : 'none';
+        });
+    });
+    </script>
+    </body>
+    </html>
+    

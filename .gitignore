@@ -1,0 +1,12 @@
+# IDE
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor files
+*~
+*.swp
+*.swo
