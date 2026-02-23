@@ -7,7 +7,13 @@
     <title>Card Grid</title>
     <style>
       body { font-family: sans-serif; background: #111; color: #fff; padding: 20px; }
-      .filter { margin-bottom: 20px; padding: 8px; font-size: 1em; width: 100%; max-width: 400px; }
+      .filters { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
+      .filter-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+      .filter-label { font-weight: bold; min-width: 80px; }
+      .search-input { padding: 8px; font-size: 1em; flex: 1; min-width: 200px; background: #222; color: #fff; border: 1px solid #444; border-radius: 4px; }
+      .toggle-btn { padding: 8px 16px; background: #222; color: #fff; border: 1px solid #444; border-radius: 4px; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+      .toggle-btn:hover { background: #333; }
+      .toggle-btn.active { background: #007bff; border-color: #007bff; }
       .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
       .card { display: flex; flex-direction: column; align-items: center; transition: transform 0.2s; }
       .card img { width: 100%; border-radius: 8px; }
@@ -17,1735 +23,1786 @@
     </head>
     <body>
     <h1>Card Collection</h1>
-    <input type="text" id="nameFilter" class="filter" placeholder="Filter by card name...">
+    <div class="filters">
+        <div class="filter-group">
+            <input type="text" id="nameFilter" class="search-input" placeholder="Filter by card name...">
+        </div>
+        <div class="filter-group" id="rarityFilters">
+            <span class="filter-label">Rarity:</span>
+            <button class="toggle-btn active" data-value="" id="allRarity">All</button><button class="toggle-btn" data-value="common">Common</button><button class="toggle-btn" data-value="uncommon">Uncommon</button><button class="toggle-btn" data-value="rare">Rare</button><button class="toggle-btn" data-value="epic">Epic</button><button class="toggle-btn" data-value="showcase">Showcase</button>
+        </div>
+        <div class="filter-group" id="domainFilters">
+            <span class="filter-label">Domain:</span>
+            <button class="toggle-btn active" data-value="" id="allDomain">All</button><button class="toggle-btn" data-value="fury">Fury</button><button class="toggle-btn" data-value="calm">Calm</button><button class="toggle-btn" data-value="mind">Mind</button><button class="toggle-btn" data-value="body">Body</button><button class="toggle-btn" data-value="chaos">Chaos</button><button class="toggle-btn" data-value="order">Order</button>
+        </div>
+    </div>
     <div class="grid" id="cardGrid">
     
-        <div class="card" data-name="Blazing Scorcher">
+        <div class="card" data-name="Blazing Scorcher" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-001.webp?width=384" alt="Blazing Scorcher">
             <div class="name">Blazing Scorcher</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Brazen Buccaneer">
+        <div class="card" data-name="Brazen Buccaneer" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-002.webp?width=384" alt="Brazen Buccaneer">
             <div class="name">Brazen Buccaneer</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Chemtech Enforcer">
+        <div class="card" data-name="Chemtech Enforcer" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-003.webp?width=384" alt="Chemtech Enforcer">
             <div class="name">Chemtech Enforcer</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Cleave">
+        <div class="card" data-name="Cleave" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-004.webp?width=384" alt="Cleave">
             <div class="name">Cleave</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Disintegrate">
+        <div class="card" data-name="Disintegrate" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-005.webp?width=384" alt="Disintegrate">
             <div class="name">Disintegrate</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Flame Chompers">
+        <div class="card" data-name="Flame Chompers" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-006.webp?width=384" alt="Flame Chompers">
             <div class="name">Flame Chompers</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Fury Rune">
+        <div class="card" data-name="Fury Rune" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-007.webp?width=384" alt="Fury Rune">
             <div class="name">Fury Rune</div>
-            <div class="count">10</div>
+            <div class="count">12</div>
         </div>
         
-        <div class="card" data-name="Fury Rune">
+        <div class="card" data-name="Fury Rune" data-rarity="showcase" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-007a.webp?width=384" alt="Fury Rune">
             <div class="name">Fury Rune</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Get Excited!">
+        <div class="card" data-name="Get Excited!" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-008.webp?width=384" alt="Get Excited!">
             <div class="name">Get Excited!</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Hextech Ray">
+        <div class="card" data-name="Hextech Ray" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-009.webp?width=384" alt="Hextech Ray">
             <div class="name">Hextech Ray</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Legion Rearguard">
+        <div class="card" data-name="Legion Rearguard" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-010.webp?width=384" alt="Legion Rearguard">
             <div class="name">Legion Rearguard</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Magma Wurm">
+        <div class="card" data-name="Magma Wurm" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-011.webp?width=384" alt="Magma Wurm">
             <div class="name">Magma Wurm</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Noxus Hopeful">
+        <div class="card" data-name="Noxus Hopeful" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-012.webp?width=384" alt="Noxus Hopeful">
             <div class="name">Noxus Hopeful</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Pouty Poro">
+        <div class="card" data-name="Pouty Poro" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-013.webp?width=384" alt="Pouty Poro">
             <div class="name">Pouty Poro</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Sky Splitter">
+        <div class="card" data-name="Sky Splitter" data-rarity="common" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-014.webp?width=384" alt="Sky Splitter">
             <div class="name">Sky Splitter</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Captain Farron">
+        <div class="card" data-name="Captain Farron" data-rarity="uncommon" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-015.webp?width=384" alt="Captain Farron">
             <div class="name">Captain Farron</div>
             <div class="count">6</div>
         </div>
         
-        <div class="card" data-name="Dangerous Duo">
+        <div class="card" data-name="Dangerous Duo" data-rarity="uncommon" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-016.webp?width=384" alt="Dangerous Duo">
             <div class="name">Dangerous Duo</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Iron Ballista">
+        <div class="card" data-name="Iron Ballista" data-rarity="uncommon" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-017.webp?width=384" alt="Iron Ballista">
             <div class="name">Iron Ballista</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Noxus Saboteur">
+        <div class="card" data-name="Noxus Saboteur" data-rarity="uncommon" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-018.webp?width=384" alt="Noxus Saboteur">
             <div class="name">Noxus Saboteur</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Raging Soul">
+        <div class="card" data-name="Raging Soul" data-rarity="uncommon" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-019.webp?width=384" alt="Raging Soul">
             <div class="name">Raging Soul</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Scrapyard Champion">
+        <div class="card" data-name="Scrapyard Champion" data-rarity="uncommon" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-020.webp?width=384" alt="Scrapyard Champion">
             <div class="name">Scrapyard Champion</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Sun Disc">
+        <div class="card" data-name="Sun Disc" data-rarity="uncommon" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-021.webp?width=384" alt="Sun Disc">
             <div class="name">Sun Disc</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Thermo Beam">
+        <div class="card" data-name="Thermo Beam" data-rarity="uncommon" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-022.webp?width=384" alt="Thermo Beam">
             <div class="name">Thermo Beam</div>
             <div class="count">6</div>
         </div>
         
-        <div class="card" data-name="Unlicensed Armory">
+        <div class="card" data-name="Unlicensed Armory" data-rarity="uncommon" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-023.webp?width=384" alt="Unlicensed Armory">
             <div class="name">Unlicensed Armory</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Void Seeker">
+        <div class="card" data-name="Void Seeker" data-rarity="uncommon" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-024.webp?width=384" alt="Void Seeker">
             <div class="name">Void Seeker</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Blind Fury">
+        <div class="card" data-name="Blind Fury" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-025.webp?width=384" alt="Blind Fury">
             <div class="name">Blind Fury</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Brynhir Thundersong">
+        <div class="card" data-name="Brynhir Thundersong" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-026.webp?width=384" alt="Brynhir Thundersong">
             <div class="name">Brynhir Thundersong</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Darius, Trifarian">
+        <div class="card" data-name="Darius, Trifarian" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-027.webp?width=384" alt="Darius, Trifarian">
             <div class="name">Darius, Trifarian</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Darius, Trifarian">
+        <div class="card" data-name="Darius, Trifarian" data-rarity="showcase" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-027a.webp?width=384" alt="Darius, Trifarian">
             <div class="name">Darius, Trifarian</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Draven, Showboat">
+        <div class="card" data-name="Draven, Showboat" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-028.webp?width=384" alt="Draven, Showboat">
             <div class="name">Draven, Showboat</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Falling Star">
+        <div class="card" data-name="Falling Star" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-029.webp?width=384" alt="Falling Star">
             <div class="name">Falling Star</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Jinx, Demolitionist">
+        <div class="card" data-name="Jinx, Demolitionist" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-030.webp?width=384" alt="Jinx, Demolitionist">
             <div class="name">Jinx, Demolitionist</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Raging Firebrand">
+        <div class="card" data-name="Raging Firebrand" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-031.webp?width=384" alt="Raging Firebrand">
             <div class="name">Raging Firebrand</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Ravenborn Tome">
+        <div class="card" data-name="Ravenborn Tome" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-032.webp?width=384" alt="Ravenborn Tome">
             <div class="name">Ravenborn Tome</div>
             <div class="count">6</div>
         </div>
         
-        <div class="card" data-name="Shakedown">
+        <div class="card" data-name="Shakedown" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-033.webp?width=384" alt="Shakedown">
             <div class="name">Shakedown</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Tryndamere, Barbarian">
+        <div class="card" data-name="Tryndamere, Barbarian" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-034.webp?width=384" alt="Tryndamere, Barbarian">
             <div class="name">Tryndamere, Barbarian</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Vayne, Hunter">
+        <div class="card" data-name="Vayne, Hunter" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-035.webp?width=384" alt="Vayne, Hunter">
             <div class="name">Vayne, Hunter</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Vi, Destructive">
+        <div class="card" data-name="Vi, Destructive" data-rarity="rare" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-036.webp?width=384" alt="Vi, Destructive">
             <div class="name">Vi, Destructive</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Volibear, Furious">
+        <div class="card" data-name="Volibear, Furious" data-rarity="epic" data-domains="fury">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-041.webp?width=384" alt="Volibear, Furious">
             <div class="name">Volibear, Furious</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Calm Rune">
+        <div class="card" data-name="Calm Rune" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-042.webp?width=384" alt="Calm Rune">
             <div class="name">Calm Rune</div>
-            <div class="count">10</div>
+            <div class="count">12</div>
         </div>
         
-        <div class="card" data-name="Calm Rune">
+        <div class="card" data-name="Calm Rune" data-rarity="showcase" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-042a.webp?width=384" alt="Calm Rune">
             <div class="name">Calm Rune</div>
-            <div class="count">1</div>
+            <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Charm">
+        <div class="card" data-name="Charm" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-043.webp?width=384" alt="Charm">
             <div class="name">Charm</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Clockwork Keeper">
+        <div class="card" data-name="Clockwork Keeper" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-044.webp?width=384" alt="Clockwork Keeper">
             <div class="name">Clockwork Keeper</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Defy">
+        <div class="card" data-name="Defy" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-045.webp?width=384" alt="Defy">
             <div class="name">Defy</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="En Garde">
+        <div class="card" data-name="En Garde" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-046.webp?width=384" alt="En Garde">
             <div class="name">En Garde</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Find Your Center">
+        <div class="card" data-name="Find Your Center" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-047.webp?width=384" alt="Find Your Center">
             <div class="name">Find Your Center</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Meditation">
+        <div class="card" data-name="Meditation" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-048.webp?width=384" alt="Meditation">
             <div class="name">Meditation</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Playful Phantom">
+        <div class="card" data-name="Playful Phantom" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-049.webp?width=384" alt="Playful Phantom">
             <div class="name">Playful Phantom</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Rune Prison">
+        <div class="card" data-name="Rune Prison" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-050.webp?width=384" alt="Rune Prison">
             <div class="name">Rune Prison</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Solari Shieldbearer">
+        <div class="card" data-name="Solari Shieldbearer" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-051.webp?width=384" alt="Solari Shieldbearer">
             <div class="name">Solari Shieldbearer</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Stalwart Poro">
+        <div class="card" data-name="Stalwart Poro" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-052.webp?width=384" alt="Stalwart Poro">
             <div class="name">Stalwart Poro</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Stand United">
+        <div class="card" data-name="Stand United" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-053.webp?width=384" alt="Stand United">
             <div class="name">Stand United</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Sunlit Guardian">
+        <div class="card" data-name="Sunlit Guardian" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-054.webp?width=384" alt="Sunlit Guardian">
             <div class="name">Sunlit Guardian</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Wielder of Water">
+        <div class="card" data-name="Wielder of Water" data-rarity="common" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-055.webp?width=384" alt="Wielder of Water">
             <div class="name">Wielder of Water</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Adaptatron">
+        <div class="card" data-name="Adaptatron" data-rarity="uncommon" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-056.webp?width=384" alt="Adaptatron">
             <div class="name">Adaptatron</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Block">
+        <div class="card" data-name="Block" data-rarity="uncommon" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-057.webp?width=384" alt="Block">
             <div class="name">Block</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Discipline">
+        <div class="card" data-name="Discipline" data-rarity="uncommon" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-058.webp?width=384" alt="Discipline">
             <div class="name">Discipline</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Eclipse Herald">
+        <div class="card" data-name="Eclipse Herald" data-rarity="uncommon" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-059.webp?width=384" alt="Eclipse Herald">
             <div class="name">Eclipse Herald</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Mask of Foresight">
+        <div class="card" data-name="Mask of Foresight" data-rarity="uncommon" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-060.webp?width=384" alt="Mask of Foresight">
             <div class="name">Mask of Foresight</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Poro Herder">
+        <div class="card" data-name="Poro Herder" data-rarity="uncommon" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-061.webp?width=384" alt="Poro Herder">
             <div class="name">Poro Herder</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Reinforce">
+        <div class="card" data-name="Reinforce" data-rarity="uncommon" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-062.webp?width=384" alt="Reinforce">
             <div class="name">Reinforce</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Spirit's Refuge">
+        <div class="card" data-name="Spirit's Refuge" data-rarity="uncommon" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-063.webp?width=384" alt="Spirit's Refuge">
             <div class="name">Spirit's Refuge</div>
             <div class="count">5</div>
         </div>
         
-        <div class="card" data-name="Wind Wall">
+        <div class="card" data-name="Wind Wall" data-rarity="uncommon" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-064.webp?width=384" alt="Wind Wall">
             <div class="name">Wind Wall</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Wizened Elder">
+        <div class="card" data-name="Wizened Elder" data-rarity="uncommon" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-065.webp?width=384" alt="Wizened Elder">
             <div class="name">Wizened Elder</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Ahri, Alluring">
+        <div class="card" data-name="Ahri, Alluring" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-066.webp?width=384" alt="Ahri, Alluring">
             <div class="name">Ahri, Alluring</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Blitzcrank, Impassive">
+        <div class="card" data-name="Blitzcrank, Impassive" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-067.webp?width=384" alt="Blitzcrank, Impassive">
             <div class="name">Blitzcrank, Impassive</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Caitlyn, Patrolling">
+        <div class="card" data-name="Caitlyn, Patrolling" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-068.webp?width=384" alt="Caitlyn, Patrolling">
             <div class="name">Caitlyn, Patrolling</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Last Stand">
+        <div class="card" data-name="Last Stand" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-069.webp?width=384" alt="Last Stand">
             <div class="name">Last Stand</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Mageseeker Warden">
+        <div class="card" data-name="Mageseeker Warden" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-070.webp?width=384" alt="Mageseeker Warden">
             <div class="name">Mageseeker Warden</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Party Favors">
+        <div class="card" data-name="Party Favors" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-071.webp?width=384" alt="Party Favors">
             <div class="name">Party Favors</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Solari Shrine">
+        <div class="card" data-name="Solari Shrine" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-072.webp?width=384" alt="Solari Shrine">
             <div class="name">Solari Shrine</div>
             <div class="count">5</div>
         </div>
         
-        <div class="card" data-name="Sona, Harmonious">
+        <div class="card" data-name="Sona, Harmonious" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-073.webp?width=384" alt="Sona, Harmonious">
             <div class="name">Sona, Harmonious</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Taric, Protector">
+        <div class="card" data-name="Taric, Protector" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-074.webp?width=384" alt="Taric, Protector">
             <div class="name">Taric, Protector</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Tasty Faefolk">
+        <div class="card" data-name="Tasty Faefolk" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-075.webp?width=384" alt="Tasty Faefolk">
             <div class="name">Tasty Faefolk</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Yasuo, Remorseful">
+        <div class="card" data-name="Yasuo, Remorseful" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-076.webp?width=384" alt="Yasuo, Remorseful">
             <div class="name">Yasuo, Remorseful</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Zhonya's Hourglass">
+        <div class="card" data-name="Zhonya's Hourglass" data-rarity="rare" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-077.webp?width=384" alt="Zhonya's Hourglass">
             <div class="name">Zhonya's Hourglass</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Lee Sin, Ascetic">
+        <div class="card" data-name="Lee Sin, Ascetic" data-rarity="epic" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-078.webp?width=384" alt="Lee Sin, Ascetic">
             <div class="name">Lee Sin, Ascetic</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Mystic Reversal">
+        <div class="card" data-name="Mystic Reversal" data-rarity="epic" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-080.webp?width=384" alt="Mystic Reversal">
             <div class="name">Mystic Reversal</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Seal of Focus">
+        <div class="card" data-name="Seal of Focus" data-rarity="epic" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-081.webp?width=384" alt="Seal of Focus">
             <div class="name">Seal of Focus</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Whiteflame Protector">
+        <div class="card" data-name="Whiteflame Protector" data-rarity="epic" data-domains="calm">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-082.webp?width=384" alt="Whiteflame Protector">
             <div class="name">Whiteflame Protector</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Consult the Past">
+        <div class="card" data-name="Consult the Past" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-083.webp?width=384" alt="Consult the Past">
             <div class="name">Consult the Past</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Eager Apprentice">
+        <div class="card" data-name="Eager Apprentice" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-084.webp?width=384" alt="Eager Apprentice">
             <div class="name">Eager Apprentice</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Falling Comet">
+        <div class="card" data-name="Falling Comet" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-085.webp?width=384" alt="Falling Comet">
             <div class="name">Falling Comet</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Jeweled Colossus">
+        <div class="card" data-name="Jeweled Colossus" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-086.webp?width=384" alt="Jeweled Colossus">
             <div class="name">Jeweled Colossus</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Lecturing Yordle">
+        <div class="card" data-name="Lecturing Yordle" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-087.webp?width=384" alt="Lecturing Yordle">
             <div class="name">Lecturing Yordle</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Mega-Mech">
+        <div class="card" data-name="Mega-Mech" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-088.webp?width=384" alt="Mega-Mech">
             <div class="name">Mega-Mech</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Mind Rune">
+        <div class="card" data-name="Mind Rune" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-089.webp?width=384" alt="Mind Rune">
             <div class="name">Mind Rune</div>
-            <div class="count">10</div>
+            <div class="count">12</div>
         </div>
         
-        <div class="card" data-name="Orb of Regret">
+        <div class="card" data-name="Orb of Regret" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-090.webp?width=384" alt="Orb of Regret">
             <div class="name">Orb of Regret</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Pit Crew">
+        <div class="card" data-name="Pit Crew" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-091.webp?width=384" alt="Pit Crew">
             <div class="name">Pit Crew</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Riptide Rex">
+        <div class="card" data-name="Riptide Rex" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-092.webp?width=384" alt="Riptide Rex">
             <div class="name">Riptide Rex</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Smoke Screen">
+        <div class="card" data-name="Smoke Screen" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-093.webp?width=384" alt="Smoke Screen">
             <div class="name">Smoke Screen</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Sprite Call">
+        <div class="card" data-name="Sprite Call" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-094.webp?width=384" alt="Sprite Call">
             <div class="name">Sprite Call</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Stupefy">
+        <div class="card" data-name="Stupefy" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-095.webp?width=384" alt="Stupefy">
             <div class="name">Stupefy</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Watchful Sentry">
+        <div class="card" data-name="Watchful Sentry" data-rarity="common" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-096.webp?width=384" alt="Watchful Sentry">
             <div class="name">Watchful Sentry</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Blastcone Fae">
+        <div class="card" data-name="Blastcone Fae" data-rarity="uncommon" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-097.webp?width=384" alt="Blastcone Fae">
             <div class="name">Blastcone Fae</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Energy Conduit">
+        <div class="card" data-name="Energy Conduit" data-rarity="uncommon" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-098.webp?width=384" alt="Energy Conduit">
             <div class="name">Energy Conduit</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Garbage Grabber">
+        <div class="card" data-name="Garbage Grabber" data-rarity="uncommon" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-099.webp?width=384" alt="Garbage Grabber">
             <div class="name">Garbage Grabber</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Gemcraft Seer">
+        <div class="card" data-name="Gemcraft Seer" data-rarity="uncommon" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-100.webp?width=384" alt="Gemcraft Seer">
             <div class="name">Gemcraft Seer</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Mushroom Pouch">
+        <div class="card" data-name="Mushroom Pouch" data-rarity="uncommon" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-101.webp?width=384" alt="Mushroom Pouch">
             <div class="name">Mushroom Pouch</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Portal Rescue">
+        <div class="card" data-name="Portal Rescue" data-rarity="uncommon" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-102.webp?width=384" alt="Portal Rescue">
             <div class="name">Portal Rescue</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Ravenbloom Student">
+        <div class="card" data-name="Ravenbloom Student" data-rarity="uncommon" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-103.webp?width=384" alt="Ravenbloom Student">
             <div class="name">Ravenbloom Student</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Retreat">
+        <div class="card" data-name="Retreat" data-rarity="uncommon" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-104.webp?width=384" alt="Retreat">
             <div class="name">Retreat</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Singularity">
+        <div class="card" data-name="Singularity" data-rarity="uncommon" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-105.webp?width=384" alt="Singularity">
             <div class="name">Singularity</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Sprite Mother">
+        <div class="card" data-name="Sprite Mother" data-rarity="uncommon" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-106.webp?width=384" alt="Sprite Mother">
             <div class="name">Sprite Mother</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Ava Achiever">
+        <div class="card" data-name="Ava Achiever" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-107.webp?width=384" alt="Ava Achiever">
             <div class="name">Ava Achiever</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Convergent Mutation">
+        <div class="card" data-name="Convergent Mutation" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-108.webp?width=384" alt="Convergent Mutation">
             <div class="name">Convergent Mutation</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Dr. Mundo, Expert">
+        <div class="card" data-name="Dr. Mundo, Expert" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-109.webp?width=384" alt="Dr. Mundo, Expert">
             <div class="name">Dr. Mundo, Expert</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Ekko, Recurrent">
+        <div class="card" data-name="Ekko, Recurrent" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-110.webp?width=384" alt="Ekko, Recurrent">
             <div class="name">Ekko, Recurrent</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Heimerdinger, Inventor">
+        <div class="card" data-name="Heimerdinger, Inventor" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-111.webp?width=384" alt="Heimerdinger, Inventor">
             <div class="name">Heimerdinger, Inventor</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Kai'Sa, Evolutionary">
+        <div class="card" data-name="Kai'Sa, Evolutionary" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-112.webp?width=384" alt="Kai'Sa, Evolutionary">
             <div class="name">Kai'Sa, Evolutionary</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Malzahar, Fanatic">
+        <div class="card" data-name="Malzahar, Fanatic" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-113.webp?width=384" alt="Malzahar, Fanatic">
             <div class="name">Malzahar, Fanatic</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Progress Day">
+        <div class="card" data-name="Progress Day" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-114.webp?width=384" alt="Progress Day">
             <div class="name">Progress Day</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Promising Future">
+        <div class="card" data-name="Promising Future" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-115.webp?width=384" alt="Promising Future">
             <div class="name">Promising Future</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Thousand-Tailed Watcher">
+        <div class="card" data-name="Thousand-Tailed Watcher" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-116.webp?width=384" alt="Thousand-Tailed Watcher">
             <div class="name">Thousand-Tailed Watcher</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Viktor, Innovator">
+        <div class="card" data-name="Viktor, Innovator" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-117.webp?width=384" alt="Viktor, Innovator">
             <div class="name">Viktor, Innovator</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Viktor, Innovator">
+        <div class="card" data-name="Viktor, Innovator" data-rarity="showcase" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-117a.webp?width=384" alt="Viktor, Innovator">
             <div class="name">Viktor, Innovator</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Wraith of Echoes">
+        <div class="card" data-name="Wraith of Echoes" data-rarity="rare" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-118.webp?width=384" alt="Wraith of Echoes">
             <div class="name">Wraith of Echoes</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Seal of Insight">
+        <div class="card" data-name="Seal of Insight" data-rarity="epic" data-domains="mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-120.webp?width=384" alt="Seal of Insight">
             <div class="name">Seal of Insight</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Arena Bar">
+        <div class="card" data-name="Arena Bar" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-124.webp?width=384" alt="Arena Bar">
             <div class="name">Arena Bar</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Bilgewater Bully">
+        <div class="card" data-name="Bilgewater Bully" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-125.webp?width=384" alt="Bilgewater Bully">
             <div class="name">Bilgewater Bully</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Body Rune">
+        <div class="card" data-name="Body Rune" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-126.webp?width=384" alt="Body Rune">
             <div class="name">Body Rune</div>
-            <div class="count">8</div>
+            <div class="count">12</div>
         </div>
         
-        <div class="card" data-name="Cannon Barrage">
+        <div class="card" data-name="Cannon Barrage" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-127.webp?width=384" alt="Cannon Barrage">
             <div class="name">Cannon Barrage</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Challenge">
+        <div class="card" data-name="Challenge" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-128.webp?width=384" alt="Challenge">
             <div class="name">Challenge</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Confront">
+        <div class="card" data-name="Confront" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-129.webp?width=384" alt="Confront">
             <div class="name">Confront</div>
             <div class="count">5</div>
         </div>
         
-        <div class="card" data-name="Crackshot Corsair">
+        <div class="card" data-name="Crackshot Corsair" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-130.webp?width=384" alt="Crackshot Corsair">
             <div class="name">Crackshot Corsair</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Dune Drake">
+        <div class="card" data-name="Dune Drake" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-131.webp?width=384" alt="Dune Drake">
             <div class="name">Dune Drake</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="First Mate">
+        <div class="card" data-name="First Mate" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-132.webp?width=384" alt="First Mate">
             <div class="name">First Mate</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Flurry of Blades">
+        <div class="card" data-name="Flurry of Blades" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-133.webp?width=384" alt="Flurry of Blades">
             <div class="name">Flurry of Blades</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Mobilize">
+        <div class="card" data-name="Mobilize" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-134.webp?width=384" alt="Mobilize">
             <div class="name">Mobilize</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Pakaa Cub">
+        <div class="card" data-name="Pakaa Cub" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-135.webp?width=384" alt="Pakaa Cub">
             <div class="name">Pakaa Cub</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Pit Rookie">
+        <div class="card" data-name="Pit Rookie" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-136.webp?width=384" alt="Pit Rookie">
             <div class="name">Pit Rookie</div>
             <div class="count">5</div>
         </div>
         
-        <div class="card" data-name="Stormclaw Ursine">
+        <div class="card" data-name="Stormclaw Ursine" data-rarity="common" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-137.webp?width=384" alt="Stormclaw Ursine">
             <div class="name">Stormclaw Ursine</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Catalyst of Aeons">
+        <div class="card" data-name="Catalyst of Aeons" data-rarity="uncommon" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-138.webp?width=384" alt="Catalyst of Aeons">
             <div class="name">Catalyst of Aeons</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Cithria of Cloudfield">
+        <div class="card" data-name="Cithria of Cloudfield" data-rarity="uncommon" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-139.webp?width=384" alt="Cithria of Cloudfield">
             <div class="name">Cithria of Cloudfield</div>
             <div class="count">6</div>
         </div>
         
-        <div class="card" data-name="Herald of Scales">
+        <div class="card" data-name="Herald of Scales" data-rarity="uncommon" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-140.webp?width=384" alt="Herald of Scales">
             <div class="name">Herald of Scales</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Kinkou Monk">
+        <div class="card" data-name="Kinkou Monk" data-rarity="uncommon" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-141.webp?width=384" alt="Kinkou Monk">
             <div class="name">Kinkou Monk</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Mountain Drake">
+        <div class="card" data-name="Mountain Drake" data-rarity="uncommon" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-142.webp?width=384" alt="Mountain Drake">
             <div class="name">Mountain Drake</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Pirate's Haven">
+        <div class="card" data-name="Pirate's Haven" data-rarity="uncommon" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-143.webp?width=384" alt="Pirate's Haven">
             <div class="name">Pirate's Haven</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Spoils of War">
+        <div class="card" data-name="Spoils of War" data-rarity="uncommon" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-144.webp?width=384" alt="Spoils of War">
             <div class="name">Spoils of War</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Unyielding Spirit">
+        <div class="card" data-name="Unyielding Spirit" data-rarity="uncommon" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-145.webp?width=384" alt="Unyielding Spirit">
             <div class="name">Unyielding Spirit</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Wallop">
+        <div class="card" data-name="Wallop" data-rarity="uncommon" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-146.webp?width=384" alt="Wallop">
             <div class="name">Wallop</div>
             <div class="count">6</div>
         </div>
         
-        <div class="card" data-name="Wildclaw Shaman">
+        <div class="card" data-name="Wildclaw Shaman" data-rarity="uncommon" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-147.webp?width=384" alt="Wildclaw Shaman">
             <div class="name">Wildclaw Shaman</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Anivia, Primal">
+        <div class="card" data-name="Anivia, Primal" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-148.webp?width=384" alt="Anivia, Primal">
             <div class="name">Anivia, Primal</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Carnivorous Snapvine">
+        <div class="card" data-name="Carnivorous Snapvine" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-149.webp?width=384" alt="Carnivorous Snapvine">
             <div class="name">Carnivorous Snapvine</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Kraken Hunter">
+        <div class="card" data-name="Kraken Hunter" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-150.webp?width=384" alt="Kraken Hunter">
             <div class="name">Kraken Hunter</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Lee Sin, Centered">
+        <div class="card" data-name="Lee Sin, Centered" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-151.webp?width=384" alt="Lee Sin, Centered">
             <div class="name">Lee Sin, Centered</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Mistfall">
+        <div class="card" data-name="Mistfall" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-152.webp?width=384" alt="Mistfall">
             <div class="name">Mistfall</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Overt Operation">
+        <div class="card" data-name="Overt Operation" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-153.webp?width=384" alt="Overt Operation">
             <div class="name">Overt Operation</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Primal Strength">
+        <div class="card" data-name="Primal Strength" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-154.webp?width=384" alt="Primal Strength">
             <div class="name">Primal Strength</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Qiyana, Victorious">
+        <div class="card" data-name="Qiyana, Victorious" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-155.webp?width=384" alt="Qiyana, Victorious">
             <div class="name">Qiyana, Victorious</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Udyr, Wildman">
+        <div class="card" data-name="Udyr, Wildman" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-157.webp?width=384" alt="Udyr, Wildman">
             <div class="name">Udyr, Wildman</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Volibear, Imposing">
+        <div class="card" data-name="Volibear, Imposing" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-158.webp?width=384" alt="Volibear, Imposing">
             <div class="name">Volibear, Imposing</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Warwick, Hunter">
+        <div class="card" data-name="Warwick, Hunter" data-rarity="rare" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-159.webp?width=384" alt="Warwick, Hunter">
             <div class="name">Warwick, Hunter</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Dazzling Aurora">
+        <div class="card" data-name="Dazzling Aurora" data-rarity="epic" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-160.webp?width=384" alt="Dazzling Aurora">
             <div class="name">Dazzling Aurora</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Miss Fortune, Captain">
+        <div class="card" data-name="Miss Fortune, Captain" data-rarity="epic" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-162.webp?width=384" alt="Miss Fortune, Captain">
             <div class="name">Miss Fortune, Captain</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Miss Fortune, Captain">
+        <div class="card" data-name="Miss Fortune, Captain" data-rarity="showcase" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-162a.webp?width=384" alt="Miss Fortune, Captain">
             <div class="name">Miss Fortune, Captain</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Sett, Brawler">
+        <div class="card" data-name="Sett, Brawler" data-rarity="epic" data-domains="body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-164.webp?width=384" alt="Sett, Brawler">
             <div class="name">Sett, Brawler</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Cemetery Attendant">
+        <div class="card" data-name="Cemetery Attendant" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-165.webp?width=384" alt="Cemetery Attendant">
             <div class="name">Cemetery Attendant</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Chaos Rune">
+        <div class="card" data-name="Chaos Rune" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-166.webp?width=384" alt="Chaos Rune">
             <div class="name">Chaos Rune</div>
-            <div class="count">10</div>
+            <div class="count">12</div>
         </div>
         
-        <div class="card" data-name="Ember Monk">
+        <div class="card" data-name="Chaos Rune" data-rarity="showcase" data-domains="chaos">
+            <img src="https://cdn.piltoverarchive.com/cards/OGN-166a.webp?width=384" alt="Chaos Rune">
+            <div class="name">Chaos Rune</div>
+            <div class="count">1</div>
+        </div>
+        
+        <div class="card" data-name="Ember Monk" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-167.webp?width=384" alt="Ember Monk">
             <div class="name">Ember Monk</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Fight or Flight">
+        <div class="card" data-name="Fight or Flight" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-168.webp?width=384" alt="Fight or Flight">
             <div class="name">Fight or Flight</div>
             <div class="count">5</div>
         </div>
         
-        <div class="card" data-name="Gust">
+        <div class="card" data-name="Gust" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-169.webp?width=384" alt="Gust">
             <div class="name">Gust</div>
             <div class="count">6</div>
         </div>
         
-        <div class="card" data-name="Morbid Return">
+        <div class="card" data-name="Morbid Return" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-170.webp?width=384" alt="Morbid Return">
             <div class="name">Morbid Return</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Mystic Poro">
+        <div class="card" data-name="Mystic Poro" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-171.webp?width=384" alt="Mystic Poro">
             <div class="name">Mystic Poro</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Rebuke">
+        <div class="card" data-name="Rebuke" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-172.webp?width=384" alt="Rebuke">
             <div class="name">Rebuke</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Ride the Wind">
+        <div class="card" data-name="Ride the Wind" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-173.webp?width=384" alt="Ride the Wind">
             <div class="name">Ride the Wind</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Sai Scout">
+        <div class="card" data-name="Sai Scout" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-174.webp?width=384" alt="Sai Scout">
             <div class="name">Sai Scout</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Shipyard Skulker">
+        <div class="card" data-name="Shipyard Skulker" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-175.webp?width=384" alt="Shipyard Skulker">
             <div class="name">Shipyard Skulker</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Sneaky Deckhand">
+        <div class="card" data-name="Sneaky Deckhand" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-176.webp?width=384" alt="Sneaky Deckhand">
             <div class="name">Sneaky Deckhand</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Stealthy Pursuer">
+        <div class="card" data-name="Stealthy Pursuer" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-177.webp?width=384" alt="Stealthy Pursuer">
             <div class="name">Stealthy Pursuer</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Undercover Agent">
+        <div class="card" data-name="Undercover Agent" data-rarity="common" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-178.webp?width=384" alt="Undercover Agent">
             <div class="name">Undercover Agent</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Acceptable Losses">
+        <div class="card" data-name="Acceptable Losses" data-rarity="uncommon" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-179.webp?width=384" alt="Acceptable Losses">
             <div class="name">Acceptable Losses</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Fading Memories">
+        <div class="card" data-name="Fading Memories" data-rarity="uncommon" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-180.webp?width=384" alt="Fading Memories">
             <div class="name">Fading Memories</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Pack of Wonders">
+        <div class="card" data-name="Pack of Wonders" data-rarity="uncommon" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-181.webp?width=384" alt="Pack of Wonders">
             <div class="name">Pack of Wonders</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Scrapheap">
+        <div class="card" data-name="Scrapheap" data-rarity="uncommon" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-182.webp?width=384" alt="Scrapheap">
             <div class="name">Scrapheap</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Stacked Deck">
+        <div class="card" data-name="Stacked Deck" data-rarity="uncommon" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-183.webp?width=384" alt="Stacked Deck">
             <div class="name">Stacked Deck</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="The Syren">
+        <div class="card" data-name="The Syren" data-rarity="uncommon" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-184.webp?width=384" alt="The Syren">
             <div class="name">The Syren</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Traveling Merchant">
+        <div class="card" data-name="Traveling Merchant" data-rarity="uncommon" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-185.webp?width=384" alt="Traveling Merchant">
             <div class="name">Traveling Merchant</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Treasure Trove">
+        <div class="card" data-name="Treasure Trove" data-rarity="uncommon" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-186.webp?width=384" alt="Treasure Trove">
             <div class="name">Treasure Trove</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Whirlwind">
+        <div class="card" data-name="Whirlwind" data-rarity="uncommon" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-187.webp?width=384" alt="Whirlwind">
             <div class="name">Whirlwind</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Zaunite Bouncer">
+        <div class="card" data-name="Zaunite Bouncer" data-rarity="uncommon" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-188.webp?width=384" alt="Zaunite Bouncer">
             <div class="name">Zaunite Bouncer</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Kayn, Unleashed">
+        <div class="card" data-name="Kayn, Unleashed" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-189.webp?width=384" alt="Kayn, Unleashed">
             <div class="name">Kayn, Unleashed</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Kog'Maw, Caustic">
+        <div class="card" data-name="Kog'Maw, Caustic" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-190.webp?width=384" alt="Kog'Maw, Caustic">
             <div class="name">Kog'Maw, Caustic</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Maddened Marauder">
+        <div class="card" data-name="Maddened Marauder" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-191.webp?width=384" alt="Maddened Marauder">
             <div class="name">Maddened Marauder</div>
             <div class="count">5</div>
         </div>
         
-        <div class="card" data-name="Mindsplitter">
+        <div class="card" data-name="Mindsplitter" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-192.webp?width=384" alt="Mindsplitter">
             <div class="name">Mindsplitter</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Miss Fortune, Buccaneer">
+        <div class="card" data-name="Miss Fortune, Buccaneer" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-193.webp?width=384" alt="Miss Fortune, Buccaneer">
             <div class="name">Miss Fortune, Buccaneer</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Nocturne, Horrifying">
+        <div class="card" data-name="Nocturne, Horrifying" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-194.webp?width=384" alt="Nocturne, Horrifying">
             <div class="name">Nocturne, Horrifying</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Rhasa the Sunderer">
+        <div class="card" data-name="Rhasa the Sunderer" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-195.webp?width=384" alt="Rhasa the Sunderer">
             <div class="name">Rhasa the Sunderer</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Soulgorger">
+        <div class="card" data-name="Soulgorger" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-196.webp?width=384" alt="Soulgorger">
             <div class="name">Soulgorger</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Teemo, Scout">
+        <div class="card" data-name="Teemo, Scout" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-197.webp?width=384" alt="Teemo, Scout">
             <div class="name">Teemo, Scout</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Teemo, Scout">
+        <div class="card" data-name="Teemo, Scout" data-rarity="showcase" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-197a.webp?width=384" alt="Teemo, Scout">
             <div class="name">Teemo, Scout</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="The Harrowing">
+        <div class="card" data-name="The Harrowing" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-198.webp?width=384" alt="The Harrowing">
             <div class="name">The Harrowing</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Tideturner">
+        <div class="card" data-name="Tideturner" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-199.webp?width=384" alt="Tideturner">
             <div class="name">Tideturner</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Twisted Fate, Gambler">
+        <div class="card" data-name="Twisted Fate, Gambler" data-rarity="rare" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-200.webp?width=384" alt="Twisted Fate, Gambler">
             <div class="name">Twisted Fate, Gambler</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Jinx, Rebel">
+        <div class="card" data-name="Jinx, Rebel" data-rarity="epic" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-202.webp?width=384" alt="Jinx, Rebel">
             <div class="name">Jinx, Rebel</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Seal of Discord">
+        <div class="card" data-name="Seal of Discord" data-rarity="epic" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-204.webp?width=384" alt="Seal of Discord">
             <div class="name">Seal of Discord</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Yasuo, Windrider">
+        <div class="card" data-name="Yasuo, Windrider" data-rarity="epic" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-205.webp?width=384" alt="Yasuo, Windrider">
             <div class="name">Yasuo, Windrider</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Yasuo, Windrider">
+        <div class="card" data-name="Yasuo, Windrider" data-rarity="showcase" data-domains="chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-205a.webp?width=384" alt="Yasuo, Windrider">
             <div class="name">Yasuo, Windrider</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Back to Back">
+        <div class="card" data-name="Back to Back" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-206.webp?width=384" alt="Back to Back">
             <div class="name">Back to Back</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Call to Glory">
+        <div class="card" data-name="Call to Glory" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-207.webp?width=384" alt="Call to Glory">
             <div class="name">Call to Glory</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Cruel Patron">
+        <div class="card" data-name="Cruel Patron" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-208.webp?width=384" alt="Cruel Patron">
             <div class="name">Cruel Patron</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Cull the Weak">
+        <div class="card" data-name="Cull the Weak" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-209.webp?width=384" alt="Cull the Weak">
             <div class="name">Cull the Weak</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Daring Poro">
+        <div class="card" data-name="Daring Poro" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-210.webp?width=384" alt="Daring Poro">
             <div class="name">Daring Poro</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Faithful Manufactor">
+        <div class="card" data-name="Faithful Manufactor" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-211.webp?width=384" alt="Faithful Manufactor">
             <div class="name">Faithful Manufactor</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Forge of the Future">
+        <div class="card" data-name="Forge of the Future" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-212.webp?width=384" alt="Forge of the Future">
             <div class="name">Forge of the Future</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Hidden Blade">
+        <div class="card" data-name="Hidden Blade" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-213.webp?width=384" alt="Hidden Blade">
             <div class="name">Hidden Blade</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Order Rune">
+        <div class="card" data-name="Order Rune" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-214.webp?width=384" alt="Order Rune">
             <div class="name">Order Rune</div>
             <div class="count">12</div>
         </div>
         
-        <div class="card" data-name="Order Rune">
+        <div class="card" data-name="Order Rune" data-rarity="showcase" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-214a.webp?width=384" alt="Order Rune">
             <div class="name">Order Rune</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Petty Officer">
+        <div class="card" data-name="Petty Officer" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-215.webp?width=384" alt="Petty Officer">
             <div class="name">Petty Officer</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Soaring Scout">
+        <div class="card" data-name="Soaring Scout" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-216.webp?width=384" alt="Soaring Scout">
             <div class="name">Soaring Scout</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Trifarian Gloryseeker">
+        <div class="card" data-name="Trifarian Gloryseeker" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-217.webp?width=384" alt="Trifarian Gloryseeker">
             <div class="name">Trifarian Gloryseeker</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Vanguard Captain">
+        <div class="card" data-name="Vanguard Captain" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-218.webp?width=384" alt="Vanguard Captain">
             <div class="name">Vanguard Captain</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Vanguard Sergeant">
+        <div class="card" data-name="Vanguard Sergeant" data-rarity="common" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-219.webp?width=384" alt="Vanguard Sergeant">
             <div class="name">Vanguard Sergeant</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Facebreaker">
+        <div class="card" data-name="Facebreaker" data-rarity="uncommon" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-220.webp?width=384" alt="Facebreaker">
             <div class="name">Facebreaker</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Imperial Decree">
+        <div class="card" data-name="Imperial Decree" data-rarity="uncommon" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-221.webp?width=384" alt="Imperial Decree">
             <div class="name">Imperial Decree</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Noxian Drummer">
+        <div class="card" data-name="Noxian Drummer" data-rarity="uncommon" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-222.webp?width=384" alt="Noxian Drummer">
             <div class="name">Noxian Drummer</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Peak Guardian">
+        <div class="card" data-name="Peak Guardian" data-rarity="uncommon" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-223.webp?width=384" alt="Peak Guardian">
             <div class="name">Peak Guardian</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Salvage">
+        <div class="card" data-name="Salvage" data-rarity="uncommon" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-224.webp?width=384" alt="Salvage">
             <div class="name">Salvage</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Solari Chief">
+        <div class="card" data-name="Solari Chief" data-rarity="uncommon" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-225.webp?width=384" alt="Solari Chief">
             <div class="name">Solari Chief</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Spectral Matron">
+        <div class="card" data-name="Spectral Matron" data-rarity="uncommon" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-226.webp?width=384" alt="Spectral Matron">
             <div class="name">Spectral Matron</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Symbol of the Solari">
+        <div class="card" data-name="Symbol of the Solari" data-rarity="uncommon" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-227.webp?width=384" alt="Symbol of the Solari">
             <div class="name">Symbol of the Solari</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Vanguard Helm">
+        <div class="card" data-name="Vanguard Helm" data-rarity="uncommon" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-228.webp?width=384" alt="Vanguard Helm">
             <div class="name">Vanguard Helm</div>
             <div class="count">6</div>
         </div>
         
-        <div class="card" data-name="Vengeance">
+        <div class="card" data-name="Vengeance" data-rarity="uncommon" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-229.webp?width=384" alt="Vengeance">
             <div class="name">Vengeance</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Albus Ferros">
+        <div class="card" data-name="Albus Ferros" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-230.webp?width=384" alt="Albus Ferros">
             <div class="name">Albus Ferros</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Commander Ledros">
+        <div class="card" data-name="Commander Ledros" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-231.webp?width=384" alt="Commander Ledros">
             <div class="name">Commander Ledros</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Fiora, Victorious">
+        <div class="card" data-name="Fiora, Victorious" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-232.webp?width=384" alt="Fiora, Victorious">
             <div class="name">Fiora, Victorious</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Grand Strategem">
+        <div class="card" data-name="Grand Strategem" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-233.webp?width=384" alt="Grand Strategem">
             <div class="name">Grand Strategem</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Harnessed Dragon">
+        <div class="card" data-name="Harnessed Dragon" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-234.webp?width=384" alt="Harnessed Dragon">
             <div class="name">Harnessed Dragon</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Karma, Channeler">
+        <div class="card" data-name="Karma, Channeler" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-235.webp?width=384" alt="Karma, Channeler">
             <div class="name">Karma, Channeler</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Karthus, Eternal">
+        <div class="card" data-name="Karthus, Eternal" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-236.webp?width=384" alt="Karthus, Eternal">
             <div class="name">Karthus, Eternal</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="King's Edict">
+        <div class="card" data-name="King's Edict" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-237.webp?width=384" alt="King's Edict">
             <div class="name">King's Edict</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Leona, Determined">
+        <div class="card" data-name="Leona, Determined" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-238.webp?width=384" alt="Leona, Determined">
             <div class="name">Leona, Determined</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Machine Evangel">
+        <div class="card" data-name="Machine Evangel" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-239.webp?width=384" alt="Machine Evangel">
             <div class="name">Machine Evangel</div>
             <div class="count">5</div>
         </div>
         
-        <div class="card" data-name="Sett, Kingpin">
+        <div class="card" data-name="Sett, Kingpin" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-240.webp?width=384" alt="Sett, Kingpin">
             <div class="name">Sett, Kingpin</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Shen, Kinkou">
+        <div class="card" data-name="Shen, Kinkou" data-rarity="rare" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-241.webp?width=384" alt="Shen, Kinkou">
             <div class="name">Shen, Kinkou</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Baited Hook">
+        <div class="card" data-name="Baited Hook" data-rarity="epic" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-242.webp?width=384" alt="Baited Hook">
             <div class="name">Baited Hook</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Darius, Executioner">
+        <div class="card" data-name="Darius, Executioner" data-rarity="epic" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-243.webp?width=384" alt="Darius, Executioner">
             <div class="name">Darius, Executioner</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Divine Judgment">
+        <div class="card" data-name="Divine Judgment" data-rarity="epic" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-244.webp?width=384" alt="Divine Judgment">
             <div class="name">Divine Judgment</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Seal of Unity">
+        <div class="card" data-name="Seal of Unity" data-rarity="epic" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-245.webp?width=384" alt="Seal of Unity">
             <div class="name">Seal of Unity</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Viktor, Leader">
+        <div class="card" data-name="Viktor, Leader" data-rarity="epic" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-246.webp?width=384" alt="Viktor, Leader">
             <div class="name">Viktor, Leader</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Viktor, Leader">
+        <div class="card" data-name="Viktor, Leader" data-rarity="showcase" data-domains="order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-246a.webp?width=384" alt="Viktor, Leader">
             <div class="name">Viktor, Leader</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Daughter of the Void">
+        <div class="card" data-name="Daughter of the Void" data-rarity="rare" data-domains="fury,mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-247.webp?width=384" alt="Daughter of the Void">
             <div class="name">Daughter of the Void</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Icathian Rain">
+        <div class="card" data-name="Icathian Rain" data-rarity="epic" data-domains="fury,mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-248.webp?width=384" alt="Icathian Rain">
             <div class="name">Icathian Rain</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Relentless Storm">
+        <div class="card" data-name="Relentless Storm" data-rarity="rare" data-domains="fury,body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-249.webp?width=384" alt="Relentless Storm">
             <div class="name">Relentless Storm</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Loose Cannon">
+        <div class="card" data-name="Loose Cannon" data-rarity="rare" data-domains="fury,chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-251.webp?width=384" alt="Loose Cannon">
             <div class="name">Loose Cannon</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Hand of Noxus">
+        <div class="card" data-name="Hand of Noxus" data-rarity="rare" data-domains="fury,order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-253.webp?width=384" alt="Hand of Noxus">
             <div class="name">Hand of Noxus</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Nine-Tailed Fox">
+        <div class="card" data-name="Nine-Tailed Fox" data-rarity="rare" data-domains="calm,mind">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-255.webp?width=384" alt="Nine-Tailed Fox">
             <div class="name">Nine-Tailed Fox</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Blind Monk">
+        <div class="card" data-name="Blind Monk" data-rarity="rare" data-domains="calm,body">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-257.webp?width=384" alt="Blind Monk">
             <div class="name">Blind Monk</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Unforgiven">
+        <div class="card" data-name="Unforgiven" data-rarity="rare" data-domains="calm,chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-259.webp?width=384" alt="Unforgiven">
             <div class="name">Unforgiven</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Radiant Dawn">
+        <div class="card" data-name="Radiant Dawn" data-rarity="rare" data-domains="calm,order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-261.webp?width=384" alt="Radiant Dawn">
             <div class="name">Radiant Dawn</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Swift Scout">
+        <div class="card" data-name="Swift Scout" data-rarity="rare" data-domains="mind,chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-263.webp?width=384" alt="Swift Scout">
             <div class="name">Swift Scout</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Guerilla Warfare">
+        <div class="card" data-name="Guerilla Warfare" data-rarity="epic" data-domains="mind,chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-264.webp?width=384" alt="Guerilla Warfare">
             <div class="name">Guerilla Warfare</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Herald of the Arcane">
+        <div class="card" data-name="Herald of the Arcane" data-rarity="rare" data-domains="mind,order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-265.webp?width=384" alt="Herald of the Arcane">
             <div class="name">Herald of the Arcane</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Siphon Power">
+        <div class="card" data-name="Siphon Power" data-rarity="epic" data-domains="mind,order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-266.webp?width=384" alt="Siphon Power">
             <div class="name">Siphon Power</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Bounty Hunter">
+        <div class="card" data-name="Bounty Hunter" data-rarity="rare" data-domains="body,chaos">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-267.webp?width=384" alt="Bounty Hunter">
             <div class="name">Bounty Hunter</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="The Boss">
+        <div class="card" data-name="The Boss" data-rarity="rare" data-domains="body,order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-269.webp?width=384" alt="The Boss">
             <div class="name">The Boss</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Showstopper">
+        <div class="card" data-name="Showstopper" data-rarity="epic" data-domains="body,order">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-270.webp?width=384" alt="Showstopper">
             <div class="name">Showstopper</div>
             <div class="count">1</div>
         </div>
         
-        <div class="card" data-name="Recruit (DE)">
+        <div class="card" data-name="Recruit (DE)" data-rarity="common" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-271.webp?width=384" alt="Recruit (DE)">
             <div class="name">Recruit (DE)</div>
             <div class="count">10</div>
         </div>
         
-        <div class="card" data-name="Recruit (NX)">
+        <div class="card" data-name="Recruit (NX)" data-rarity="common" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-272.webp?width=384" alt="Recruit (NX)">
             <div class="name">Recruit (NX)</div>
             <div class="count">9</div>
         </div>
         
-        <div class="card" data-name="Recruit (ZN)">
+        <div class="card" data-name="Recruit (ZN)" data-rarity="common" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-273.webp?width=384" alt="Recruit (ZN)">
             <div class="name">Recruit (ZN)</div>
             <div class="count">10</div>
         </div>
         
-        <div class="card" data-name="Sprite">
+        <div class="card" data-name="Sprite" data-rarity="common" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-274.webp?width=384" alt="Sprite">
             <div class="name">Sprite</div>
             <div class="count">10</div>
         </div>
         
-        <div class="card" data-name="Altar to Unity">
+        <div class="card" data-name="Altar to Unity" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-275.webp?width=384" alt="Altar to Unity">
             <div class="name">Altar to Unity</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Aspirant's Climb">
+        <div class="card" data-name="Aspirant's Climb" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-276.webp?width=384" alt="Aspirant's Climb">
             <div class="name">Aspirant's Climb</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Back-Alley Bar">
+        <div class="card" data-name="Back-Alley Bar" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-277.webp?width=384" alt="Back-Alley Bar">
             <div class="name">Back-Alley Bar</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Bandle Tree">
+        <div class="card" data-name="Bandle Tree" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-278.webp?width=384" alt="Bandle Tree">
             <div class="name">Bandle Tree</div>
             <div class="count">4</div>
         </div>
         
-        <div class="card" data-name="Fortified Position">
+        <div class="card" data-name="Fortified Position" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-279.webp?width=384" alt="Fortified Position">
             <div class="name">Fortified Position</div>
             <div class="count">5</div>
         </div>
         
-        <div class="card" data-name="Grove of the God-Willow">
+        <div class="card" data-name="Grove of the God-Willow" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-280.webp?width=384" alt="Grove of the God-Willow">
             <div class="name">Grove of the God-Willow</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Hallowed Tomb">
+        <div class="card" data-name="Hallowed Tomb" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-281.webp?width=384" alt="Hallowed Tomb">
             <div class="name">Hallowed Tomb</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Monastery of Hirana">
+        <div class="card" data-name="Monastery of Hirana" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-282.webp?width=384" alt="Monastery of Hirana">
             <div class="name">Monastery of Hirana</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Navori Fighting Pit">
+        <div class="card" data-name="Navori Fighting Pit" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-283.webp?width=384" alt="Navori Fighting Pit">
             <div class="name">Navori Fighting Pit</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Obelisk of Power">
+        <div class="card" data-name="Obelisk of Power" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-284.webp?width=384" alt="Obelisk of Power">
             <div class="name">Obelisk of Power</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Reaver's Row">
+        <div class="card" data-name="Reaver's Row" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-285.webp?width=384" alt="Reaver's Row">
             <div class="name">Reaver's Row</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Reckoner's Arena">
+        <div class="card" data-name="Reckoner's Arena" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-286.webp?width=384" alt="Reckoner's Arena">
             <div class="name">Reckoner's Arena</div>
             <div class="count">3</div>
         </div>
         
-        <div class="card" data-name="Sigil of the Storm">
+        <div class="card" data-name="Sigil of the Storm" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-287.webp?width=384" alt="Sigil of the Storm">
             <div class="name">Sigil of the Storm</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Startipped Peak">
+        <div class="card" data-name="Startipped Peak" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-288.webp?width=384" alt="Startipped Peak">
             <div class="name">Startipped Peak</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Targon's Peak">
+        <div class="card" data-name="Targon's Peak" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-289.webp?width=384" alt="Targon's Peak">
             <div class="name">Targon's Peak</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="The Arena's Greatest">
+        <div class="card" data-name="The Arena's Greatest" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-290.webp?width=384" alt="The Arena's Greatest">
             <div class="name">The Arena's Greatest</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="The Candlelit Sanctum">
+        <div class="card" data-name="The Candlelit Sanctum" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-291.webp?width=384" alt="The Candlelit Sanctum">
             <div class="name">The Candlelit Sanctum</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="The Dreaming Tree">
+        <div class="card" data-name="The Dreaming Tree" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-292.webp?width=384" alt="The Dreaming Tree">
             <div class="name">The Dreaming Tree</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="The Grand Plaza">
+        <div class="card" data-name="The Grand Plaza" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-293.webp?width=384" alt="The Grand Plaza">
             <div class="name">The Grand Plaza</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Trifarian War Camp">
+        <div class="card" data-name="Trifarian War Camp" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-294.webp?width=384" alt="Trifarian War Camp">
             <div class="name">Trifarian War Camp</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Vilemaw's Lair">
+        <div class="card" data-name="Vilemaw's Lair" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-295.webp?width=384" alt="Vilemaw's Lair">
             <div class="name">Vilemaw's Lair</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Void Gate">
+        <div class="card" data-name="Void Gate" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-296.webp?width=384" alt="Void Gate">
             <div class="name">Void Gate</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Windswept Hillock">
+        <div class="card" data-name="Windswept Hillock" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-297.webp?width=384" alt="Windswept Hillock">
             <div class="name">Windswept Hillock</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="Zaun Warrens">
+        <div class="card" data-name="Zaun Warrens" data-rarity="uncommon" data-domains="colorless">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-298.webp?width=384" alt="Zaun Warrens">
             <div class="name">Zaun Warrens</div>
             <div class="count">2</div>
         </div>
         
-        <div class="card" data-name="OGN-XXX">
+        <div class="card" data-name="OGN-XXX" data-rarity="" data-domains="">
             <img src="https://cdn.piltoverarchive.com/cards/OGN-XXX.webp?width=384" alt="OGN-XXX">
             <div class="name">OGN-XXX</div>
-            <div class="count">42</div>
+            <div class="count">67</div>
         </div>
         
     </div>
     <script>
-    const filterInput = document.getElementById('nameFilter');
-    filterInput.addEventListener('input', () => {
-        const filter = filterInput.value.toLowerCase();
+    const nameFilter = document.getElementById('nameFilter');
+    const rarityButtons = document.querySelectorAll('#rarityFilters .toggle-btn');
+    const domainButtons = document.querySelectorAll('#domainFilters .toggle-btn');
+
+    function getActiveValue(buttons) {
+        const activeBtn = Array.from(buttons).find(btn => btn.classList.contains('active'));
+        return activeBtn ? activeBtn.getAttribute('data-value').toLowerCase() : '';
+    }
+
+    function setupToggleButtons(buttons) {
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                updateFilters();
+            });
+        });
+    }
+
+    setupToggleButtons(rarityButtons);
+    setupToggleButtons(domainButtons);
+
+    function updateFilters() {
+        const nameVal = nameFilter.value.toLowerCase();
+        const rarityVal = getActiveValue(rarityButtons);
+        const domainVal = getActiveValue(domainButtons);
+
         document.querySelectorAll('.card').forEach(card => {
             const name = card.getAttribute('data-name').toLowerCase();
-            card.style.display = name.includes(filter) ? 'flex' : 'none';
+            const rarity = card.getAttribute('data-rarity').toLowerCase();
+            const domains = card.getAttribute('data-domains').toLowerCase().split(',');
+
+            const matchesName = name.includes(nameVal);
+            const matchesRarity = rarityVal === '' || rarity === rarityVal;
+            const matchesDomain = domainVal === '' || domains.includes(domainVal);
+
+            card.style.display = (matchesName && matchesRarity && matchesDomain) ? 'flex' : 'none';
         });
-    });
+    }
+
+    nameFilter.addEventListener('input', updateFilters);
     </script>
     </body>
     </html>
